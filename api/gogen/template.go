@@ -14,6 +14,7 @@ const (
 	etcTemplateFile     = "etc.tpl"
 	handlerTemplateFile = "handler.tpl"
 	logicTemplateFile   = "logic.tpl"
+	typesTemplateFile   = "types.tpl"
 	mainTemplateFile    = "main.tpl"
 )
 

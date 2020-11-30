@@ -14,6 +14,7 @@ import (
 	apiutil "github.com/tal-tech/go-zero/tools/goctl/api/util"
 	"github.com/tal-tech/go-zero/tools/goctl/config"
 	"github.com/tal-tech/go-zero/tools/goctl/util"
+	ctlutil "github.com/tal-tech/go-zero/tools/goctl/util"
 	"github.com/tal-tech/go-zero/tools/goctl/util/format"
 )
 
@@ -69,7 +70,12 @@ func genTypes(dir string, cfg *config.Config, api *spec.ApiSpec) error {
 	}
 	defer fp.Close()
 
-	t := template.Must(template.New("typesTemplate").Parse(typesTemplate))
+	text, err := ctlutil.LoadTemplate(category, typesTemplateFile, typesTemplate)
+	if err != nil {
+		return err
+	}
+
+	t := template.Must(template.New("typesTemplate").Parse(text))
 	buffer := new(bytes.Buffer)
 	err = t.Execute(buffer, map[string]interface{}{
 		"types":        val,
